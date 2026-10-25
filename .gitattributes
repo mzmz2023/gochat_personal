@@ -1,0 +1,65 @@
+# 换行与二进制处理规则
+#
+# 目的：源码在任何平台检出后，文本文件都是 LF；图片、SQLite 等二进制不被转换。
+# 说明：本快照当前工作区所有文本文件均为 LF，无历史 CRLF 需要重规范化。
+
+# 二进制宏：关闭文本识别、diff 与换行处理
+[attr]gcbinary -text -diff -eol
+
+# 默认：文本自动识别，统一以 LF 入库和检出
+* text=auto eol=lf
+
+# Shell 脚本必须是 LF，否则容器内 /bin/sh 会报 $'\r': not found
+*.sh text eol=lf
+*.bash text eol=lf
+
+# 构建与配置文本，显式声明，避免被误判为二进制
+Dockerfile text eol=lf
+Makefile text eol=lf
+*.go text eol=lf
+*.md text eol=lf
+*.toml text eol=lf
+*.ini text eol=lf
+*.conf text eol=lf
+*.cfg text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+*.json text eol=lf
+*.proto text eol=lf
+*.css text eol=lf
+*.js text eol=lf
+*.map text eol=lf
+*.html text eol=lf
+*.sql text eol=lf
+*.txt text eol=lf
+*.svg text eol=lf
+
+# vendor 中 gotenv 的测试夹具是纯文本（.env 内容为 HELLO=world）
+vendor/github.com/subosito/gotenv/.env text eol=lf
+vendor/github.com/subosito/gotenv/.env.invalid text eol=lf
+
+# 二进制：禁止换行转换与文本 diff
+*.png gcbinary
+*.jpg gcbinary
+*.jpeg gcbinary
+*.gif gcbinary
+*.ico gcbinary
+*.webp gcbinary
+*.bmp gcbinary
+*.pdf gcbinary
+*.zip gcbinary
+*.gz gcbinary
+*.tgz gcbinary
+*.tar gcbinary
+*.woff gcbinary
+*.woff2 gcbinary
+*.ttf gcbinary
+*.eot gcbinary
+*.mp4 gcbinary
+*.webm gcbinary
+*.sqlite3 gcbinary
+*.sqlite3-journal gcbinary
+*.sqlite3-wal gcbinary
+*.sqlite3-shm gcbinary
+*.db gcbinary
+*.bak gcbinary

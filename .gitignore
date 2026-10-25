@@ -1,0 +1,26 @@
+# 本机环境变量与密钥：不得提交（部署手册 docs/deployment.md 第 4 节）
+.env.local
+.env.local.*
+
+# 通用本地 env 文件
+.env
+.env.*
+# 示例文件与 vendor 中 gotenv 的测试夹具必须保留，不能被上面的通用规则误伤
+!.env.example
+!vendor/github.com/subosito/gotenv/.env
+!vendor/github.com/subosito/gotenv/.env.invalid
+
+# 运行期生成的 SQLite 旁路文件；演示库 db/gochat.sqlite3 本身保留
+*.sqlite3-journal
+*.sqlite3-wal
+*.sqlite3-shm
+*.db-journal
+
+# 编译产物（reload.sh 输出到 bin/gochat.bin）
+/bin/gochat.bin
+
+# 编辑器与系统文件
+.idea/
+.vscode/
+Thumbs.db
+desktop.ini
